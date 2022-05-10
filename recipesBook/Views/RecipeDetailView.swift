@@ -17,13 +17,13 @@ struct RecipeDetailView: View {
         VStack {
             HStack {
                 Text("Author: \(recipe.mainInformation.author)")
-                    .font(.subheadline)
+                    .font(.title3)
                     .padding()
                 Spacer()
             }
             HStack {
                 Text(recipe.mainInformation.description)
-                    .font(.subheadline)
+                    .font(.title3)
                     .padding()
                 Spacer()
             }

@@ -35,7 +35,7 @@ struct MainInformation {
         case breakfast = "Breakfast"
         case lunch = "Lunch"
         case dinner = "Dinner"
-        case dessert = "Desserts"
+        case dessert = "Dessert"
     }
 }
 

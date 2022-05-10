@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct RecipesListView: View {
-    @StateObject var recipeData = RecipeData()
+    @EnvironmentObject var recipeData: RecipeData
+    var category: MainInformation.Category
     
     private let listBackgroundColor = AppColor.background
     private let listTextColor = AppColor.foreground
     
     var body: some View {
-        NavigationView {
         List {
             ForEach(recipes) {
                 recipe in
@@ -26,21 +26,23 @@ struct RecipesListView: View {
             .foregroundColor(listTextColor)
         }
         .navigationTitle(navigationTitle)
-        }
     }
 }
 
 extension RecipesListView {
     var recipes: [Recipe] {
-        recipeData.recipes
+        recipeData.recipes(for: category)
     }
     var navigationTitle: String {
-        "All recipes"
+        "\(category.rawValue) recipes"
     }
 }
 
 struct RecipesListView_Previews: PreviewProvider {
     static var previews: some View {
-        RecipesListView()
+        NavigationView {
+        RecipesListView(category: .breakfast)
+                .environmentObject(RecipeData())
+        }
     }
 }

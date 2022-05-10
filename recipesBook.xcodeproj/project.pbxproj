@@ -15,6 +15,7 @@
 		3AD2B547282A804300EA123D /* RecipeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD2B546282A804300EA123D /* RecipeData.swift */; };
 		3AD2B549282A949600EA123D /* RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD2B548282A949600EA123D /* RecipeDetailView.swift */; };
 		3AD2B54B282A9B5900EA123D /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD2B54A282A9B5900EA123D /* AppColor.swift */; };
+		3AD2B54D282AEF7400EA123D /* RecipeCategoryGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD2B54C282AEF7400EA123D /* RecipeCategoryGridView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		3AD2B546282A804300EA123D /* RecipeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeData.swift; sourceTree = "<group>"; };
 		3AD2B548282A949600EA123D /* RecipeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailView.swift; sourceTree = "<group>"; };
 		3AD2B54A282A9B5900EA123D /* AppColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColor.swift; sourceTree = "<group>"; };
+		3AD2B54C282AEF7400EA123D /* RecipeCategoryGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCategoryGridView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 			children = (
 				3AD2B535282A72BB00EA123D /* RecipesListView.swift */,
 				3AD2B548282A949600EA123D /* RecipeDetailView.swift */,
+				3AD2B54C282AEF7400EA123D /* RecipeCategoryGridView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -175,6 +178,7 @@
 			files = (
 				3AD2B542282A739C00EA123D /* Recipe.swift in Sources */,
 				3AD2B549282A949600EA123D /* RecipeDetailView.swift in Sources */,
+				3AD2B54D282AEF7400EA123D /* RecipeCategoryGridView.swift in Sources */,
 				3AD2B547282A804300EA123D /* RecipeData.swift in Sources */,
 				3AD2B536282A72BB00EA123D /* RecipesListView.swift in Sources */,
 				3AD2B534282A72BB00EA123D /* recipesBookApp.swift in Sources */,
