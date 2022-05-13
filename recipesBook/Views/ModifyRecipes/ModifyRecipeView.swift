@@ -13,7 +13,6 @@ struct ModifyRecipeView: View {
     @State private var selection = Selection.main
     
     var body: some View {
-        
         VStack {
             Picker("Select recipe component", selection: $selection, content: {
                 Text("Main Info").tag(Selection.main)
@@ -25,7 +24,8 @@ struct ModifyRecipeView: View {
             .padding()
             switch selection {
             case .main:
-                Text("Main edit")
+                ModifyMainInformationView(mainInformation: $recipe.mainInformation)
+                    .navigationTitle("Edit main info")
             case .ingredients:
                 Text("Ingredients")
             case .directions:
