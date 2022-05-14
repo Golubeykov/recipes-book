@@ -97,9 +97,11 @@ struct ModifyIngredientsView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
         ModifyComponentsView <Ingredient, ModifyIngredientView>(components: $Ingreds0)
+                .navigationTitle("Edit ingredients")
         }
         NavigationView {
         ModifyComponentsView <Ingredient, ModifyIngredientView>(components: $Ingreds1)
+                .navigationTitle("Edit ingredients")
         }
     }
 }

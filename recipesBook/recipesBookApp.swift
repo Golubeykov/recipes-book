@@ -9,9 +9,10 @@ import SwiftUI
 
 @main
 struct recipesBookApp: App {
+    @StateObject var recipeData = RecipeData()
     var body: some Scene {
         WindowGroup {
-            RecipeCategoryGridView()
+            RecipeCategoryGridView().environmentObject(recipeData)
         }
     }
 }

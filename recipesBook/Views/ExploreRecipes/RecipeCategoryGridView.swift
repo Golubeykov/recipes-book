@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct RecipeCategoryGridView: View {
-    @StateObject var recipeData = RecipeData()
     
     var body: some View {
         NavigationView {
@@ -17,7 +16,7 @@ struct RecipeCategoryGridView: View {
                 ForEach(MainInformation.Category.allCases, id: \.self) {
                     category in
                     NavigationLink(destination: RecipesListView(category: category)
-                        .environmentObject(recipeData), label: { CategoryView(category: category) })
+                        /*.environmentObject(recipeData)*/, label: { CategoryView(category: category) })
                 }
             })
             .navigationTitle("Categories")

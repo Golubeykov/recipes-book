@@ -114,8 +114,8 @@
 		3AD2B543282A7F8900EA123D /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				3AAAA9CB282C44A70017389F /* ModifyRecipes */,
 				3AAAA9CA282C44930017389F /* ExploreRecipes */,
+				3AAAA9CB282C44A70017389F /* ModifyRecipes */,
 			);
 			path = Views;
 			sourceTree = "<group>";

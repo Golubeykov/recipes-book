@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct RecipesListView: View {
-    @StateObject var recipeData = RecipeData()
+
+    @EnvironmentObject var recipeData: RecipeData
     
     var category: MainInformation.Category
     @State private var isPresenting = false
@@ -23,7 +24,6 @@ struct RecipesListView: View {
                 recipe in
                 NavigationLink(destination: {
                     RecipeDetailView(recipe: binding(for: recipe))
-                        .environmentObject(recipeData)
                 }, label: {
                     Text(recipe.mainInformation.name)
                 })
