@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct RecipeDetailView: View {
+    @EnvironmentObject var recipeData: RecipeData
     @Binding var recipe: Recipe
     @State private var isPresenting = false
     

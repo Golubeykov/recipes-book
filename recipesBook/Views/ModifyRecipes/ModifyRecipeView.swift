@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ModifyRecipeView: View {
     @Binding var recipe: Recipe
-    
+
     @State private var selection = Selection.main
     
     var body: some View {

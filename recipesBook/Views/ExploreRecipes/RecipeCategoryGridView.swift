@@ -16,7 +16,8 @@ struct RecipeCategoryGridView: View {
             LazyVGrid (columns: [GridItem(), GridItem()], content: {
                 ForEach(MainInformation.Category.allCases, id: \.self) {
                     category in
-                    NavigationLink(destination: RecipesListView(category: category).environmentObject(recipeData), label: { CategoryView(category: category) })
+                    NavigationLink(destination: RecipesListView(category: category)
+                        .environmentObject(recipeData), label: { CategoryView(category: category) })
                 }
             })
             .navigationTitle("Categories")

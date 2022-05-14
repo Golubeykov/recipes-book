@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct RecipesListView: View {
-    @EnvironmentObject var recipeData: RecipeData
+    @StateObject var recipeData = RecipeData()
+    
     var category: MainInformation.Category
     @State private var isPresenting = false
     @State private var newRecipe = Recipe()
@@ -20,7 +21,10 @@ struct RecipesListView: View {
         List {
             ForEach(recipes) {
                 recipe in
-                NavigationLink(destination: { RecipeDetailView(recipe: binding(for: recipe)) }, label: {
+                NavigationLink(destination: {
+                    RecipeDetailView(recipe: binding(for: recipe))
+                        .environmentObject(recipeData)
+                }, label: {
                     Text(recipe.mainInformation.name)
                 })
             }
@@ -73,7 +77,7 @@ extension RecipesListView {
         return $recipeData.recipes[index]
     }
 }
-
+/*
 struct RecipesListView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
@@ -82,3 +86,4 @@ struct RecipesListView_Previews: PreviewProvider {
         }
     }
 }
+ */

@@ -28,7 +28,7 @@ protocol ModifyComponentView: View {
 }
 
 struct ModifyComponentsView <Component: RecipeComponent, DestinationView: ModifyComponentView>: View where DestinationView.Component == Component {
-    
+
     @Binding var components: [Component]
     @State private var newComponent = Component()
     
