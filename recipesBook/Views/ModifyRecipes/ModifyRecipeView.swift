@@ -27,10 +27,11 @@ struct ModifyRecipeView: View {
                 ModifyMainInformationView(mainInformation: $recipe.mainInformation)
                     .navigationTitle("Edit main info")
             case .ingredients:
-                ModifyIngredientsView(ingredients: $recipe.ingredients)
+                ModifyComponentsView<Ingredient, ModifyIngredientView>(components: $recipe.ingredients)
                     .navigationTitle("Edit ingredients")
             case .directions:
-                Text("Directions")
+                ModifyComponentsView<Direction, ModifyDirectionView>(components: $recipe.directions)
+                    .navigationTitle("Edit directions")
             }
             Spacer()
         }

@@ -47,7 +47,7 @@ struct MainInformation {
     }
 }
 
-struct Ingredient: Identifiable {
+struct Ingredient: Identifiable, RecipeComponent {
     var id = UUID()
     
     var name: String
@@ -90,9 +90,20 @@ struct Ingredient: Identifiable {
     }
 }
 
-struct Direction {
+struct Direction: Identifiable, RecipeComponent {
+    var id = UUID()
+    
     var description: String
     var isOptional: Bool
+    
+    init(description: String, isOptional: Bool) {
+        self.description = description
+        self.isOptional = isOptional
+    }
+    
+    init() {
+        self.init(description: "", isOptional: false)
+    }
 }
 
 extension Recipe {

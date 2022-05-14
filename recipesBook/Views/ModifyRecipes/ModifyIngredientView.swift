@@ -7,9 +7,14 @@
 
 import SwiftUI
 
-struct ModifyIngredientView: View {
+struct ModifyIngredientView: ModifyComponentView {
     @Binding var ingredient: Ingredient
     let createAction: ((Ingredient) -> Void)
+    
+    init(component: Binding<Ingredient>, createAction: @escaping (Ingredient)-> Void) {
+        self._ingredient = component
+        self.createAction = createAction
+    }
     
     private let listBackgroundColor = AppColor.background
     private let listTextColor = AppColor.foreground
@@ -66,11 +71,11 @@ struct ModifyIngredientView_Previews: PreviewProvider {
     @State static var ingred0 = Ingredient()
     @State static var ingred1 = Recipe.testRecipes[0].ingredients[0]
     static var previews: some View {
-        ModifyIngredientView(ingredient: $ingred0) {
+        ModifyIngredientView(component: $ingred0) {
             ingredient in
             print(ingredient)
         }
-        ModifyIngredientView(ingredient: $ingred1) {
+        ModifyIngredientView(component: $ingred1) {
             ingredient in
             print(ingredient)
         }
