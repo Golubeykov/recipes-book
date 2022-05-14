@@ -8,10 +8,18 @@
 import SwiftUI
 
 struct ModifyIngredientView: View {
-    @State var ingredient: Ingredient = Ingredient(name: "", quantity: 0.0, unit: .g)
+    @Binding var ingredient: Ingredient
+    let createAction: ((Ingredient) -> Void)
+    
+    private let listBackgroundColor = AppColor.background
+    private let listTextColor = AppColor.foreground
+    
+    @Environment(\.presentationMode) private var mode
+    
     var body: some View {
         Form {
             TextField("Ingredient name", text: $ingredient.name)
+                .listRowBackground(listBackgroundColor)
             Stepper(value: $ingredient.quantity, in: 0...100, step: 0.5) {
                 HStack {
                     Text("Quantity:")
@@ -22,7 +30,7 @@ struct ModifyIngredientView: View {
                     //Выше закомментирована реализация Stepper с шагом 0.5, но эта реализация не позволяет вводить данные вручную, без Stepper. В итоге реализован вариант с NumberFormatter.
                     
                 }
-            }
+            }.listRowBackground(listBackgroundColor)
             HStack {
                 Text("Unit")
                 Spacer()
@@ -31,8 +39,17 @@ struct ModifyIngredientView: View {
                         Text(unit.rawValue) }
                 })
                 .pickerStyle(.menu)
-            }
+            }.listRowBackground(listBackgroundColor)
+            HStack {
+                Spacer()
+                Button("Save") {
+                    createAction(ingredient)
+                    mode.wrappedValue.dismiss()
+                }
+                Spacer()
+            }.listRowBackground(listBackgroundColor)
         }
+        .foregroundColor(listTextColor)
     }
 }
 
@@ -46,7 +63,16 @@ extension NumberFormatter {
 }
 
 struct ModifyIngredientView_Previews: PreviewProvider {
+    @State static var ingred0 = Ingredient()
+    @State static var ingred1 = Recipe.testRecipes[0].ingredients[0]
     static var previews: some View {
-        ModifyIngredientView()
+        ModifyIngredientView(ingredient: $ingred0) {
+            ingredient in
+            print(ingredient)
+        }
+        ModifyIngredientView(ingredient: $ingred1) {
+            ingredient in
+            print(ingredient)
+        }
     }
 }
