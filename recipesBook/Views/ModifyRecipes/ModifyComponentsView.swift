@@ -9,6 +9,17 @@ import SwiftUI
 
 protocol RecipeComponent: CustomStringConvertible {
     init()
+    static func singularName() -> String
+    static func pluralName() -> String
+}
+
+extension RecipeComponent {
+    static func singularName() -> String {
+        String(describing: self).lowercased()
+    }
+    static func pluralName() -> String {
+        self.singularName() + "s"
+    }
 }
 
 protocol ModifyComponentView: View {
@@ -29,11 +40,11 @@ struct ModifyComponentsView <Component: RecipeComponent, DestinationView: Modify
             component in
             components.append(component)
             newComponent = Component()
-        }
+        }.navigationTitle("Add a \(Component.singularName().capitalized)")
         VStack {
             if components.isEmpty {
                 Spacer()
-                NavigationLink("Add the first component", destination: {
+                NavigationLink("Add the first \(Component.singularName())", destination: {
                     addComponentView
                 })
                 Spacer()
@@ -44,7 +55,7 @@ struct ModifyComponentsView <Component: RecipeComponent, DestinationView: Modify
                         Text(component.description)
                             .listRowBackground(listBackgroundColor)
                     }
-                    NavigationLink("Add another component", destination: {
+                    NavigationLink("Add another \(Component.singularName())", destination: {
                         addComponentView
                     })
                     .buttonStyle(PlainButtonStyle())
