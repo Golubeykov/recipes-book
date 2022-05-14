@@ -23,7 +23,7 @@ extension RecipeComponent {
 }
 
 protocol ModifyComponentView: View {
-    associatedtype Component: Identifiable
+    associatedtype Component
     init(component: Binding<Component>, createAction: @escaping (Component)-> Void)
 }
 
@@ -50,10 +50,14 @@ struct ModifyComponentsView <Component: RecipeComponent, DestinationView: Modify
                 Spacer()
             } else {
                 List {
-                    ForEach(components) {
-                        component in
-                        Text(component.description)
+                    ForEach(components.indices, id:\.self) { index in
+                        let component = components[index]
+                        let editComponentView = DestinationView(component: $components[index]) {
+                            _ in return
+                        }
+                            .navigationTitle("Edit \(Component.singularName().capitalized)")
                             .listRowBackground(listBackgroundColor)
+                        NavigationLink(component.description, destination: editComponentView)
                     }
                     NavigationLink("Add another \(Component.singularName())", destination: {
                         addComponentView
