@@ -42,6 +42,14 @@ struct ModifyComponentsView <Component: RecipeComponent, DestinationView: Modify
             newComponent = Component()
         }.navigationTitle("Add a \(Component.singularName().capitalized)")
         VStack {
+            HStack {
+                Text(Component.pluralName().capitalized)
+                    .font(.title)
+                    .padding()
+                Spacer()
+                EditButton()
+                    .padding()
+            }
             if components.isEmpty {
                 Spacer()
                 NavigationLink("Add the first \(Component.singularName())", destination: {
@@ -59,11 +67,16 @@ struct ModifyComponentsView <Component: RecipeComponent, DestinationView: Modify
                             .listRowBackground(listBackgroundColor)
                         NavigationLink(component.description, destination: editComponentView)
                     }
+                    .onDelete { components.remove(atOffsets: $0) }
+                    .onMove { indices, newOffset in
+                        components.move(fromOffsets: indices, toOffset: newOffset)
+                    }
                     NavigationLink("Add another \(Component.singularName())", destination: {
                         addComponentView
                     })
                     .buttonStyle(PlainButtonStyle())
                     .listRowBackground(listBackgroundColor)
+                    
                 }
             }
         }.foregroundColor(listTextColor)
