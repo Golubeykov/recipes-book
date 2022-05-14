@@ -32,24 +32,20 @@ struct ModifyComponentsView <Component: RecipeComponent, DestinationView: Modify
     @Binding var components: [Component]
     @State private var newComponent = Component()
     
+    @State var editMode: EditMode = .inactive
+    @State var isEditing = false
+    
     private let listBackgroundColor = AppColor.background
     private let listTextColor = AppColor.foreground
     
     var body: some View {
+
         let addComponentView = DestinationView(component: $newComponent) {
             component in
             components.append(component)
             newComponent = Component()
         }.navigationTitle("Add a \(Component.singularName().capitalized)")
         VStack {
-            HStack {
-                Text(Component.pluralName().capitalized)
-                    .font(.title)
-                    .padding()
-                Spacer()
-                EditButton()
-                    .padding()
-            }
             if components.isEmpty {
                 Spacer()
                 NavigationLink("Add the first \(Component.singularName())", destination: {
@@ -57,6 +53,14 @@ struct ModifyComponentsView <Component: RecipeComponent, DestinationView: Modify
                 })
                 Spacer()
             } else {
+                HStack {
+                    Button(isEditing ? "Done" : "Delete / change order of \(Component.pluralName())", action: {
+                    isEditing.toggle()
+                    editMode = isEditing ? .active : .inactive
+                    })
+                    .padding()
+                    Spacer()
+                }
                 List {
                     ForEach(components.indices, id:\.self) { index in
                         let component = components[index]
@@ -64,22 +68,26 @@ struct ModifyComponentsView <Component: RecipeComponent, DestinationView: Modify
                             _ in return
                         }
                             .navigationTitle("Edit \(Component.singularName().capitalized)")
-                            .listRowBackground(listBackgroundColor)
                         NavigationLink(component.description, destination: editComponentView)
                     }
                     .onDelete { components.remove(atOffsets: $0) }
                     .onMove { indices, newOffset in
                         components.move(fromOffsets: indices, toOffset: newOffset)
                     }
+                    .listRowBackground(listBackgroundColor)
                     NavigationLink("Add another \(Component.singularName())", destination: {
                         addComponentView
                     })
                     .buttonStyle(PlainButtonStyle())
                     .listRowBackground(listBackgroundColor)
-                    
-                }
+                }.environment(\.editMode, $editMode)
             }
         }.foregroundColor(listTextColor)
+    }
+}
+extension EditMode {
+    mutating func toggle() {
+        self = self == .active ? .inactive : .active
     }
 }
 
@@ -87,7 +95,11 @@ struct ModifyIngredientsView_Previews: PreviewProvider {
     @State static var Ingreds1 = Recipe.testRecipes[0].ingredients
     @State static var Ingreds0 = [Ingredient]()
     static var previews: some View {
+        NavigationView {
         ModifyComponentsView <Ingredient, ModifyIngredientView>(components: $Ingreds0)
+        }
+        NavigationView {
         ModifyComponentsView <Ingredient, ModifyIngredientView>(components: $Ingreds1)
+        }
     }
 }

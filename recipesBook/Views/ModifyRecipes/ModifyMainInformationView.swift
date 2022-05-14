@@ -25,7 +25,6 @@ struct ModifyMainInformationView: View {
             }, header: {Text("Description")})
             HStack {
                 Text("Category")
-                    .foregroundColor(.black)
                 Spacer()
                 Picker("Category", selection: $mainInformation.category, content: {
                     Text(MainInformation.Category.breakfast.rawValue).tag(MainInformation.Category.breakfast)
@@ -37,7 +36,7 @@ struct ModifyMainInformationView: View {
                 
             }
             .listRowBackground(listBackgroundColor)
-            .foregroundColor(listTextColor)
+
             // альтернативная реализация picker
             /*
             Picker(selection: $mainInformation.category, label:
@@ -53,6 +52,7 @@ struct ModifyMainInformationView: View {
              .pickerStyle(MenuPickerStyle()) */
 
         }
+        .foregroundColor(listTextColor)
     }
 }
 
