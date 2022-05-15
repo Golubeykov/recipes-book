@@ -35,8 +35,8 @@ struct ModifyComponentsView <Component: RecipeComponent, DestinationView: Modify
     @State var editMode: EditMode = .inactive
     @State var isEditing = false
     
-    private let listBackgroundColor = AppColor.background
-    private let listTextColor = AppColor.foreground
+    @AppStorage("listBackgroundColor") private var listBackgroundColor = AppColor.background
+    @AppStorage("listTextColor") private var listTextColor = AppColor.foreground
     
     var body: some View {
 
