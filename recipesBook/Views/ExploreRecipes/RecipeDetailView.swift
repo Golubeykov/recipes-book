@@ -87,10 +87,10 @@ struct RecipeDetailView: View {
                         })
                     }
             }
-            .onDisappear {
-                recipeData.saveRecipes()
-            }
         })
+        .onDisappear {
+            recipeData.saveRecipes()
+        }
     }
 }
 
