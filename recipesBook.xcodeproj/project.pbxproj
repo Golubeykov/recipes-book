@@ -119,9 +119,9 @@
 			isa = PBXGroup;
 			children = (
 				3AAAA9D6283113D00017389F /* MainTabView.swift */,
+				3AAAA9D828311E710017389F /* SettingsView.swift */,
 				3AAAA9CA282C44930017389F /* ExploreRecipes */,
 				3AAAA9CB282C44A70017389F /* ModifyRecipes */,
-				3AAAA9D828311E710017389F /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
