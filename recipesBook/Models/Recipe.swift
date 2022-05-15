@@ -13,6 +13,7 @@ struct Recipe: Identifiable {
     var mainInformation: MainInformation
     var ingredients: [Ingredient]
     var directions: [Direction]
+    var isFavorite = false
     
     var isValid: Bool {
         mainInformation.isVaild && !ingredients.isEmpty && !directions.isEmpty

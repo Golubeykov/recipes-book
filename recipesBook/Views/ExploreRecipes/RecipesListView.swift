@@ -10,8 +10,8 @@ import SwiftUI
 struct RecipesListView: View {
 
     @EnvironmentObject var recipeData: RecipeData
-    
-    var category: MainInformation.Category
+    let viewStyle: ViewStyle
+
     @State private var isPresenting = false
     @State private var newRecipe = Recipe()
     
@@ -35,6 +35,8 @@ struct RecipesListView: View {
         .toolbar(content: {
             ToolbarItem(placement: .navigationBarTrailing, content: {
                 Button(action: {
+                    newRecipe = Recipe()
+                    newRecipe.mainInformation.category = recipes.first?.mainInformation.category ?? .breakfast
                     isPresenting = true
                 }, label: {
                     Image(systemName: "plus")
@@ -53,6 +55,9 @@ struct RecipesListView: View {
                         ToolbarItem(placement: .navigationBarTrailing, content: {
                             if newRecipe.isValid {
                             Button("Add") {
+                                if case .favorites = viewStyle {
+                                    newRecipe.isFavorite = true
+                                }
                                 recipeData.add(recipe: newRecipe)
                                 isPresenting = false
                             }
@@ -66,24 +71,39 @@ struct RecipesListView: View {
 }
 
 extension RecipesListView {
-    var recipes: [Recipe] {
-        recipeData.recipes(for: category)
+    enum ViewStyle {
+        case favorites
+        case singleCategory(MainInformation.Category)
+    }
+    private var recipes: [Recipe] {
+        switch viewStyle {
+        case let .singleCategory(category):
+            return recipeData.recipes(for: category)
+        case .favorites:
+            return recipeData.favoritesRecipes
+        }
     }
     var navigationTitle: String {
-        "\(category.rawValue) recipes"
+        switch viewStyle {
+        case let .singleCategory(category):
+            return "\(category.rawValue) recipes"
+        case .favorites:
+            return "Favorite recipes"
+        }
     }
     func binding(for recipe: Recipe) -> Binding<Recipe> {
         guard let index = recipeData.index(of: recipe) else { fatalError("Recipe not found") }
         return $recipeData.recipes[index]
     }
+    
 }
-/*
+
 struct RecipesListView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-        RecipesListView(category: .breakfast)
+            RecipesListView(viewStyle: .singleCategory(.breakfast))
                 .environmentObject(RecipeData())
         }
     }
 }
- */
+ 
